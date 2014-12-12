@@ -1,0 +1,19 @@
+{
+    "name": "jambroo/yii2-aws",
+    "description": "AWS extension for the Yii framework",
+    "keywords": ["yii2", "aws", "s3", "cloud-front", 'dynamo-db'],
+    "type": "yii2-extension",
+    "license": "GPL-3",
+    "authors": [
+        {
+            "name": "James Brooking",
+            "email": "jambroo@gmail.com"
+        }
+    ],
+    "require": {
+        "yiisoft/yii2": "*"
+    },
+    "autoload": {
+        "psr-4": { "jambroo\\aws\\": "" }
+    }
+}
