@@ -1,7 +1,7 @@
 {
     "name": "jambroo/yii2-aws",
     "description": "AWS extension for the Yii framework",
-    "keywords": ["yii2", "aws", "s3", "cloud-front", 'dynamo-db'],
+    "keywords": ["yii2", "aws", "s3", "cloud-front", "dynamo-db"],
     "type": "yii2-extension",
     "license": "GPL-3",
     "authors": [
@@ -11,6 +11,8 @@
         }
     ],
     "require": {
+        "php": ">=5.3.3",
+        "aws/aws-sdk-php": "2.*",
         "yiisoft/yii2": "*"
     },
     "autoload": {
