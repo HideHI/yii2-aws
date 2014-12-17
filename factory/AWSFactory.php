@@ -1,6 +1,6 @@
 <?php
 
-namespace jambroo\aws;
+namespace jambroo\aws\factory;
 
 use yii\base\Component;
 use yii\base\InvalidConfigException;
@@ -15,8 +15,8 @@ use Guzzle\Service\Client;
 /**
  * AWSFactory represents a factory class for generating AWS connections.
  *
- * @author Paul Klimov <klimov.paul@gmail.com>
- * @since 2.0
+ * @author James Brooking <jambroo@gmail.com>
+ * @since 1.0
  */
 class AWSFactory extends Component
 {
