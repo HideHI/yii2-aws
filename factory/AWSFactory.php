@@ -20,13 +20,14 @@ use Guzzle\Service\Client;
  */
 class AWSFactory extends Component
 {
-    
+    public $config;
+
     /**
      * Initializes the AWS Connection.
      *
      * @return AWS Instance
      */
-    protected function initConnection()
+    public function getClient()
     {
         $config = Yii::$app->aws->config;
 
