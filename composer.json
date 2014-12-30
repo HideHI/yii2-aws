@@ -12,13 +12,10 @@
     ],
     "require": {
         "php": ">=5.3.3",
-        "aws/aws-sdk-php": "2.*",
         "yiisoft/yii2": "*",
+        "aws/aws-sdk-php": "2.*",
         "codeception/codeception": "2.0.9",
         "codeception/specify": "0.4.1",
         "codeception/verify": "0.2.7"
-    },
-    "autoload": {
-        "psr-4": { "jambroo\\aws\\": "" }
     }
 }
