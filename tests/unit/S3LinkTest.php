@@ -1,16 +1,17 @@
 <?php
 
-namespace jambroo\aws\tests\codeception\unit\view\helper;
-
-use Yii;
-
+use Aws\Common\Aws;
 use Aws\S3\S3Client;
+use jambroo\aws\factory\AWSFactory;
 use jambroo\aws\view\helper\S3Link;
 
-use PHPUnit_Framework_TestCase;
-
-class S3LinkTest extends \PHPUnit_Framework_TestCase
+class S3LinkTest extends \Codeception\TestCase\Test
 {
+    /**
+     * @var \UnitTester
+     */
+    protected $tester;
+
     /**
      * @var S3Client
      */
@@ -21,26 +22,34 @@ class S3LinkTest extends \PHPUnit_Framework_TestCase
      */
     protected $viewHelper;
 
+    /**
+     * @inheritdoc
+     */
     protected function setUp()
     {
+print_r(get_declared_classes()); exit;
         parent::setUp();
-    
+
         $this->s3Client = S3Client::factory(array(
             'key'    => '1234',
             'secret' => '5678'
         ));
-
-        $this->viewHelper = new S3Link($this->s3Client);
+        
+	$this->viewHelper = new S3Link($this->s3Client);
     }
-
-    protected function tearDown()
+    
+    /*protected function _before()
     {
-        parent::tearDown();
     }
 
-    public function testAssertUseSslByDefault()
+    protected function _after()
+    {
+    }*/
+
+    public function testSSL()
     {
         $this->assertEquals('https', $this->viewHelper->getScheme());
     }
+
 }
 
