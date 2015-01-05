@@ -17,5 +17,11 @@
         "codeception/codeception": "2.0.9",
         "codeception/specify": "0.4.1",
         "codeception/verify": "0.2.7"
+    },
+    "autoload": {
+        "psr-4": {
+            "jambroo\\yii2-aws\\": ""
+        }
     }
+
 }
