@@ -27,7 +27,6 @@ class S3LinkTest extends \Codeception\TestCase\Test
      */
     protected function setUp()
     {
-print_r(get_declared_classes()); exit;
         parent::setUp();
 
         $this->s3Client = S3Client::factory(array(
@@ -38,14 +37,6 @@ print_r(get_declared_classes()); exit;
 	$this->viewHelper = new S3Link($this->s3Client);
     }
     
-    /*protected function _before()
-    {
-    }
-
-    protected function _after()
-    {
-    }*/
-
     public function testSSL()
     {
         $this->assertEquals('https', $this->viewHelper->getScheme());
