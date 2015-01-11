@@ -1,6 +1,6 @@
 <?php
 
-namespace jambroo\yii2-aws\view\exception;
+namespace jambroo\aws\view\exception;
 
 use Aws\Common\Exception\AwsExceptionInterface;
 use InvalidArgumentException;
