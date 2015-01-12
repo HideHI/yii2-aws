@@ -98,9 +98,17 @@ class S3Link extends AbstractLinkHelper
         // @codeCoverageIgnoreEnd
 
         if ($expiration) {
-            return $this->client->createPresignedUrl($request, $expiration);
+            $url = $this->client->createPresignedUrl($request, $expiration);
         } else {
-            return $request->getUrl();
+            $url = $request->getUrl();
         }
+
+        if ((substr($url, 0, 8) != 'https://') &&
+            (substr($url, 0, 7) != 'http://') &&
+            (substr($url, 0, 2) !== '//')) {
+            $url = '//'.$url;
+        }
+
+        return $url;
     }
 }
