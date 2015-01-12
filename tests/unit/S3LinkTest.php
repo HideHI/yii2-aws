@@ -38,12 +38,11 @@ class S3LinkTest extends \Codeception\TestCase\Test
         
 	    $this->viewHelper = new S3Link($this->s3Client);
     }
-    
+
     public function testSSL()
     {
         $this->assertEquals('https', $this->viewHelper->getScheme());
     }
-
     /**
      * @expectedException \jambroo\aws\view\exception\InvalidSchemeException
      */
@@ -51,6 +50,7 @@ class S3LinkTest extends \Codeception\TestCase\Test
     {
         $this->viewHelper->setScheme('nosuchscheme');
     }
+
     public function testGenerateSimpleLink()
     {
         $link = $this->viewHelper->__invoke('my-object', 'my-bucket');
@@ -66,7 +66,7 @@ class S3LinkTest extends \Codeception\TestCase\Test
     {
         $this->viewHelper->setScheme(null);
         $link = $this->viewHelper->__invoke('my-object', 'my-bucket');
-        $this->assertEquals('my-bucket.s3.amazonaws.com/my-object', $link);
+        $this->assertEquals('//my-bucket.s3.amazonaws.com/my-object', $link);
     }
     public function testCanUseDefaultBucket()
     {
@@ -98,5 +98,39 @@ class S3LinkTest extends \Codeception\TestCase\Test
     {
         $link = $this->viewHelper->__invoke('my-object');
     }
-}
 
+    /**
+     * @dataProvider dataForLinkSigningTest
+     */
+    public function testGenerateSignedLink($scheme)
+    {
+        $this->viewHelper->setScheme($scheme);
+        $expires = time() + 10;
+        $actualResult = $this->viewHelper->__invoke('my-object', 'my-bucket', $expires);
+
+        // Build expected signature
+        $request = $this->s3Client->get($this->viewHelper->__invoke('my-object', 'my-bucket'));
+        $request->getParams()->set('s3.resource', '/my-bucket/my-object');
+        $signature = $this->s3Client->getSignature();
+        $signature = $signature->signString(
+            $signature->createCanonicalizedString($request, $expires),
+            $this->s3Client->getCredentials()
+        );
+        $expectedResult = sprintf(
+            ltrim("{$scheme}://my-bucket.s3.amazonaws.com/my-object?AWSAccessKeyId=%s&Expires=%s&Signature=%s", ':'),
+            $this->s3Client->getCredentials()->getAccessKeyId(),
+            $expires,
+            urlencode($signature)
+        );
+        $this->assertEquals($expectedResult, $actualResult);
+    }
+
+    public function dataForLinkSigningTest()
+    {
+        return array(
+            array('https'),
+            array('http'),
+            array(NULL),
+        );
+    }
+}
