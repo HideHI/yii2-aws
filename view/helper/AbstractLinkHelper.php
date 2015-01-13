@@ -80,4 +80,22 @@ class AbstractLinkHelper
     {
         return $this->scheme;
     }
+
+    /**
+     * Return url with valid scheme or if no scheme provided prepend // to URL
+     *
+     * @param $url URL of AWS item
+     * 
+     * @return string
+     */
+    protected function cleanScheme($url)
+    {
+        foreach ($this->supportedSchemes as $supportedScheme) {
+            if ($supportedScheme && (substr($url, 0, strlen($supportedScheme)) == $supportedScheme)) {
+                return $url;
+            }
+        }
+
+        return '//'.$url;
+    }
 }

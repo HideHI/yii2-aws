@@ -103,12 +103,7 @@ class S3Link extends AbstractLinkHelper
             $url = $request->getUrl();
         }
 
-        if ((substr($url, 0, 8) != 'https://') &&
-            (substr($url, 0, 7) != 'http://') &&
-            (substr($url, 0, 2) !== '//')) {
-            $url = '//'.$url;
-        }
-
-        return $url;
+        // Return URL with valid scheme
+        return $this->cleanScheme($url);
     }
 }
