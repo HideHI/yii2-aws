@@ -20,7 +20,7 @@
     },
     "autoload": {
         "psr-4": {
-            "jambroo\\yii2-aws\\": ""
+            "jambroo\\aws\\": ""
         }
     }
 
