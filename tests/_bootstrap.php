@@ -1,8 +1,9 @@
 <?php
 // This is global bootstrap for autoloading
-// This seems incorrect to have to load these classes with so many parent directories
-require_once(__DIR__ . '/../../../../vendor/autoload.php');
-require_once(__DIR__ . '/../../../../vendor/yiisoft/yii2/Yii.php');
+// Seems wrong for me to have to go back so many parent directories to properly boostrap
+// yii from the tests directory.
+require(__DIR__ . '/../../../../vendor/autoload.php');
+require(__DIR__ . '/../../../../vendor/yiisoft/yii2/Yii.php');
 
 $config = require(__DIR__ . '/../../../../config/web.php');
 
