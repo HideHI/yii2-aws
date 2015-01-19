@@ -2,7 +2,7 @@
 
 use Aws\Common\Aws;
 use Aws\S3\S3Client;
-use jambroo\aws\factory\AWSFactory;
+use jambroo\aws\factory\AwsFactory;
 use jambroo\aws\view\helper\S3Link;
 use jambroo\aws\view\exception\InvalidSchemeException;
 use jambroo\aws\view\exception\InvalidDomainNameException;
