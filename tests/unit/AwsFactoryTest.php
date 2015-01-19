@@ -27,7 +27,7 @@ class AwsFactoryTest extends \Codeception\TestCase\Test
         $this->assertTrue($aws->getEventDispatcher()->hasListeners('service_builder.create_client'));
     }
 
-    public function testCanAddZf2ToUserAgent()
+    public function testCanAddYii2ToUserAgent()
     {
         $factory = new AwsFactory();
         $client  = S3Client::factory();
