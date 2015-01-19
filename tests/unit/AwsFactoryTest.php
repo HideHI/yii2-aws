@@ -20,7 +20,6 @@ class AwsFactoryTest extends \Codeception\TestCase\Test
     public function testCanFetchAwsFromServiceManager()
     {
         $awsFactory     = new AwsFactory();
-        $locator = new ServiceLocator;
         $aws = $awsFactory->createService(Yii::$app->aws);
 
         $this->assertInstanceOf('Guzzle\Service\Builder\ServiceBuilderInterface', $aws);
