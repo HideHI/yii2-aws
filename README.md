@@ -8,6 +8,7 @@ Installation
 ------------
 
 This extension can be install via Composer. In your root project directory composer.json can be modified to include:
+    
     ...
     "require-dev": {
         ...
@@ -35,5 +36,6 @@ General Usage
 -------------
 
 To run the supplied Codeception unit tests please navigate to the root directory of this plugin and run:
-			<project dir>/vendor/bin/codecept build
-			<project dir>/vendor/bin/codecept --steps --debug --verbose  run unit
+     
+    <project dir>/vendor/bin/codecept build
+    <project dir>/vendor/bin/codecept --steps --debug --verbose  run unit
