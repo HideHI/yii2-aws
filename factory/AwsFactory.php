@@ -13,12 +13,12 @@ use Guzzle\Common\Event;
 use Guzzle\Service\Client;
 
 /**
- * AWSFactory represents a factory class for generating AWS connections.
+ * AwsFactory represents a factory class for generating AWS connections.
  *
  * @author James Brooking <jambroo@gmail.com>
  * @since 1.0
  */
-class AWSFactory extends Component
+class AwsFactory extends Component
 {
     public $config;
 
@@ -27,9 +27,10 @@ class AWSFactory extends Component
      *
      * @return AWS Instance
      */
-    public function getClient()
+    public function createService($serviceLocator)
     {
-        $config = Yii::$app->aws->config;
+        // Retrieve config from passed service locator
+        $config = $serviceLocator->config;
 
         if (!$config) {
             $config = [];
