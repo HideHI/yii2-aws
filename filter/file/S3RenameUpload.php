@@ -11,7 +11,7 @@ use jambroo\aws\filter\exception\MissingBucketException;
 /**
  * File filter that allow to directly upload to Amazon S3, and optionally rename the file
  */
-class S3RenameUpload extends Behavior
+class S3RenameUpload
 {
     /**
      * @var S3Client
@@ -38,13 +38,6 @@ class S3RenameUpload extends Behavior
         'overwrite'            => false,
         'randomize'            => false,
     );
-    
-    public function events()
-    {
-        return [
-            Model::EVENT_BEFORE_VALIDATE => 'filter' //,
-        ];
-    }
 
     /**
      * @param S3Client $client
@@ -114,9 +107,9 @@ class S3RenameUpload extends Behavior
     }
 
     /**
-     * This method is overloaded so that the final target points to a URI using S3 protocol
-     *
-     * {@inheritdoc}
+     * @param  array $uploadData $_FILES array
+     * 
+     * @return string
      */
     protected function getFinalTarget($uploadData)
     {
@@ -126,7 +119,7 @@ class S3RenameUpload extends Behavior
         }
 
         // Get the tmp file name and convert it to an S3 key
-        $key = trim(str_replace('\\', '/', $this->getFinalTargetP($uploadData)), '/');
+        $key = trim(str_replace('\\', '/', $this->getActualFinalTarget($uploadData)), '/');
         if (strpos($key, './') === 0) {
             $key = substr($key, 2);
         }
@@ -136,9 +129,10 @@ class S3RenameUpload extends Behavior
 
     /**
      * @param  array $uploadData $_FILES array
+     * 
      * @return string
      */
-    protected function getFinalTargetP($uploadData)
+    protected function getActualFinalTarget($uploadData)
     {
         $source = $uploadData['tmp_name'];
         $target = $this->getTarget();
@@ -194,7 +188,7 @@ class S3RenameUpload extends Behavior
             );
         }
         $this->options['target'] = $target;
-        
+
         return $this;
     }
 
@@ -215,7 +209,7 @@ class S3RenameUpload extends Behavior
     public function setUseUploadName($flag = true)
     {
         $this->options['use_upload_name'] = (bool) $flag;
-        
+
         return $this;
     }
 
@@ -234,7 +228,7 @@ class S3RenameUpload extends Behavior
     public function setRandomize($flag = true)
     {
         $this->options['randomize'] = (bool) $flag;
-        
+
         return $this;
     }
 
