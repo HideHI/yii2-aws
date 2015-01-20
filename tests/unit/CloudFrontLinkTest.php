@@ -9,6 +9,7 @@ class CloudFrontLinkTest extends \Codeception\TestCase\Test
      * @var CloudFrontClient
      */
     protected $cloudFrontClient;
+
     /**
      * @var CloudFrontLink
      */
