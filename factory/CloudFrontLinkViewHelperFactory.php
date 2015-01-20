@@ -22,8 +22,6 @@ use jambroo\aws\view\helper\CloudFrontLink;
  */
 class CloudFrontLinkViewHelperFactory extends Component
 {
-    public $config;
-
     /**
      * Initializes the AWS Connection.
      *
@@ -32,7 +30,7 @@ class CloudFrontLinkViewHelperFactory extends Component
     public function createService($serviceLocator)
     {
         $awsFactory     = new AwsFactory();
-        $aws = $awsFactory->createService(Yii::$app->aws);
+        $aws = $awsFactory->createService($serviceLocator);
 
         $cloudFrontClient = $aws->get('CloudFront');
 

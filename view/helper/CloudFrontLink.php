@@ -125,9 +125,9 @@ class CloudFrontLink extends AbstractLinkHelper
         if ($this->scheme === null) {
             throw new InvalidSchemeException('Protocol relative URLs cannot be signed.');
         }
-        return $this->cleanScheme($this->client->getSignedUrl(array(
+        return $this->client->getSignedUrl(array(
             'url'     => $url,
             'expires' => $expiration
-        )));
+        ));
     }
 }

@@ -98,12 +98,9 @@ class S3Link extends AbstractLinkHelper
         // @codeCoverageIgnoreEnd
 
         if ($expiration) {
-            $url = $this->client->createPresignedUrl($request, $expiration);
+            return $this->client->createPresignedUrl($request, $expiration);
         } else {
-            $url = $request->getUrl();
+            return $request->getUrl();
         }
-
-        // Return URL with valid scheme
-        return $this->cleanScheme($url);
     }
 }
