@@ -40,6 +40,17 @@ class S3RenameUploadTest extends \Codeception\TestCase\Test
         $this->filter->filter(array('tmp_name' => 'foo'));
     }
 
+    public function testBucketNameIsTrimmedWhenSet()
+    {
+        $this->filter->setBucket('/my-bucket/');
+        $this->assertEquals('my-bucket', $this->filter->getBucket());
+
+        $this->filter->setOptions(array(
+            'bucket' => '/my-bucket/'
+        ));
+        $this->assertEquals('my-bucket', $this->filter->getBucket());
+    }
+
     /**
      * @dataProvider tmpNameProvider
      */

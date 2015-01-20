@@ -66,7 +66,10 @@ class S3RenameUpload extends Behavior
     public function setOptions($options)
     {
         foreach ($options as $key => $value) {
-            if (array_key_exists($key, $this->options)) {
+            $setter = 'set' . str_replace(' ', '', ucwords(str_replace('_', ' ', $key)));
+            if (method_exists($this, $setter)) {
+                $this->{$setter}($value);
+            } elseif (array_key_exists($key, $this->options)) {
                 $this->options[$key] = $value;
             } else {
                 throw new \Exception\InvalidArgumentException(
@@ -96,6 +99,7 @@ class S3RenameUpload extends Behavior
     public function setBucket($bucket)
     {
         $this->options['bucket'] = trim($bucket, '/');
+
         return $this;
     }
 
@@ -138,6 +142,7 @@ class S3RenameUpload extends Behavior
     {
         $source = $uploadData['tmp_name'];
         $target = $this->getTarget();
+        
         if (!isset($target) || $target == '*') {
             $target = $source;
         }
@@ -189,6 +194,7 @@ class S3RenameUpload extends Behavior
             );
         }
         $this->options['target'] = $target;
+        
         return $this;
     }
 
@@ -200,7 +206,6 @@ class S3RenameUpload extends Behavior
         return $this->options['target'];
     }
 
-
     /**
      * @param  bool $flag When true, this filter will use the $_FILES['name']
      *                       as the target filename.
@@ -210,6 +215,7 @@ class S3RenameUpload extends Behavior
     public function setUseUploadName($flag = true)
     {
         $this->options['use_upload_name'] = (bool) $flag;
+        
         return $this;
     }
 
@@ -228,6 +234,7 @@ class S3RenameUpload extends Behavior
     public function setRandomize($flag = true)
     {
         $this->options['randomize'] = (bool) $flag;
+        
         return $this;
     }
 
@@ -247,6 +254,7 @@ class S3RenameUpload extends Behavior
     public function setUseUploadExtension($flag = true)
     {
         $this->options['use_upload_extension'] = (bool) $flag;
+        
         return $this;
     }
 
@@ -265,6 +273,7 @@ class S3RenameUpload extends Behavior
     public function setOverwrite($flag = true)
     {
         $this->options['overwrite'] = (bool) $flag;
+        
         return $this;
     }
 
