@@ -3,15 +3,6 @@
 namespace jambroo\aws\factory;
 
 use yii\base\Component;
-use yii\base\InvalidConfigException;
-use Yii;
-
-use Aws\Common\Aws;
-use Aws\Common\Client\UserAgentListener;
-use Aws\Module;
-use Guzzle\Common\Event;
-use Guzzle\Service\Client;
-
 use jambroo\aws\view\helper\CloudFrontLink;
 
 /**

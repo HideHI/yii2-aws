@@ -3,9 +3,6 @@
 namespace jambroo\aws\factory;
 
 use yii\base\Component;
-use yii\base\InvalidConfigException;
-use Yii;
-
 use Aws\DynamoDb\Session\SessionHandler;
 use jambroo\aws\session\saveHandler\DynamoDb as DynamoDbSaveHandler;
 
