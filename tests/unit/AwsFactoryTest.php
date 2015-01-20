@@ -4,6 +4,7 @@ use Aws\Common\Aws;
 use Aws\S3\S3Client;
 use Aws\Common\Client\UserAgentListener;
 use jambroo\aws\factory\AwsFactory;
+use jambroo\aws\factory\CloudFrontLinkViewHelperFactory;
 
 use Aws\Tests\BaseModuleTest;
 use Guzzle\Common\Event;
@@ -37,5 +38,13 @@ class AwsFactoryTest extends \Codeception\TestCase\Test
 
         $this->assertArrayHasKey(UserAgentListener::OPTION, $clientParams);
         $this->assertRegExp('/YII2\/.+YII2MOD\/.+/', $clientParams[UserAgentListener::OPTION]);
+    }
+
+    public function testCloudFrontLinkViewHelperFactory()
+    {
+        $cloudFrontLinkViewHelperFactory     = new CloudFrontLinkViewHelperFactory();
+        $cloudFrontLinkViewHelper = $cloudFrontLinkViewHelperFactory->createService(Yii::$app->aws);
+        
+        $this->assertInstanceOf('jambroo\aws\view\helper\CloudFrontLink', $cloudFrontLinkViewHelper);
     }
 }
