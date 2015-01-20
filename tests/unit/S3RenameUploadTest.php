@@ -1,6 +1,5 @@
 <?php
 
-
 use jambroo\aws\filter\file\S3RenameUpload;
 use Aws\Common\Aws;
 use Aws\S3\S3Client;
