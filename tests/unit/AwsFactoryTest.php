@@ -6,13 +6,10 @@ use Aws\Common\Client\UserAgentListener;
 use jambroo\aws\factory\AwsFactory;
 use jambroo\aws\factory\CloudFrontLinkViewHelperFactory;
 use jambroo\aws\factory\DynamoDbSessionSaveHandlerFactory;
-
-use Aws\Tests\BaseModuleTest;
+use jambroo\aws\factory\S3RenameUploadFactory;
+use jambroo\aws\factory\S3LinkViewHelperFactory;
 use Guzzle\Common\Event;
 use Guzzle\Service\Client;
-
-use yii\di\ServiceLocator;
-use yii\caching\FileCache;
 
 /**
  * AWS Module test cases
@@ -94,5 +91,22 @@ class AwsFactoryTest extends \Codeception\TestCase\Test
         $dynamoDbSessionSaveHandler = $dynamoDbSessionSaveHandlerFactory->createService($awsSettings);
 
         $this->assertInstanceOf('jambroo\aws\session\saveHandler\DynamoDb', $dynamoDbSessionSaveHandler);
+    }
+
+    public function testS3RenameUploadFactory()
+    {
+        $s3RenameUploadFactory = new S3RenameUploadFactory();
+        $s3RenameUpload = $s3RenameUploadFactory->createService($this->awsSettings);
+        
+        $this->assertInstanceOf('jambroo\aws\filter\file\S3RenameUpload', $s3RenameUpload);
+    }
+
+
+    public function testS3LinkViewHelper()
+    {
+        $s3LinkViewHelperFactory = new S3LinkViewHelperFactory();
+        $s3LinkViewHelper = $s3LinkViewHelperFactory->createService($this->awsSettings);
+        
+        $this->assertInstanceOf('jambroo\aws\view\helper\S3Link', $s3LinkViewHelper);
     }
 }

@@ -14,10 +14,18 @@ use jambroo\aws\view\exception\InvalidDomainNameException;
 class S3RenameUploadTest extends \Codeception\TestCase\Test
 {
     /**
+     * @var \UnitTester
+     */
+    protected $tester;
+
+    /**
      * @var S3RenameUpload
      */
     protected $filter;
 
+    /**
+     * @inheritdoc
+     */
     public function setUp()
     {
        	$s3Client = S3Client::factory(array(
