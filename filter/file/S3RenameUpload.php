@@ -111,7 +111,7 @@ class S3RenameUpload
      * 
      * @return string
      */
-    protected function getFinalTarget($uploadData)
+    public function getFinalTarget($uploadData)
     {
         // We cannot upload without a bucket
         if (null === $this->options['bucket']) {
