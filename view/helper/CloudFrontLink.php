@@ -91,7 +91,7 @@ class CloudFrontLink extends AbstractLinkHelper
     {
         return $this->defaultDomain;
     }
- 
+
     /**
      * Create a link to a CloudFront object
      *
@@ -102,7 +102,7 @@ class CloudFrontLink extends AbstractLinkHelper
      * @return string
      * @throws InvalidDomainNameException
      */
-    public function __invoke($object, $domain = '', $expiration = '')
+    public function __invoke($object, $domain = '', $expiration = '', $privateKey = null, $keyPairId = null)
     {
         if (empty($domain)) {
             $domain = $this->getDefaultDomain();
@@ -125,9 +125,14 @@ class CloudFrontLink extends AbstractLinkHelper
         if ($this->scheme === null) {
             throw new InvalidSchemeException('Protocol relative URLs cannot be signed.');
         }
-        return $this->client->getSignedUrl(array(
+        $urlArray = array(
             'url'     => $url,
             'expires' => $expiration
-        ));
+        );
+        if ($privateKey && $keyPairId) {
+            $urlArray ['private_key']= $privateKey;
+            $urlArray ['key_pair_id']= $keyPairId;
+        }
+        return $this->client->getSignedUrl($urlArray);
     }
 }

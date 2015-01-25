@@ -18,13 +18,13 @@ class S3RenameUploadFactory extends Component
      *
      * @return AWS Instance
      */
-    public function createService($serviceLocator)
+    public function createService($serviceLocator, $options = array())
     {
         $awsFactory     = new AwsFactory();
         $aws = $awsFactory->createService($serviceLocator);
 
         $s3Client = $aws->get('S3');
 
-        return new S3RenameUpload($s3Client);
+        return new S3RenameUpload($s3Client, $options);
     }
 }
